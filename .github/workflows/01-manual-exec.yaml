@@ -1,0 +1,43 @@
+##CI de Nivel 01 - Disparo manual a partir de 1 clique
+
+# nome do nosso 'pipeline'
+name: 'Execução Manual'
+
+#regras de disparo (gatilhos/trigger)
+#gatilho de exec manual = workflow_dispatch
+
+on:
+  workflow_dispatch:
+
+# trabalhos /tarefas dentro do pipelie = jobs
+jobs:
+  e2e-tests1:
+
+  #maquina que o job vai executar
+  runs-on: ubuntu-latest
+
+  # passos do script do build
+  steps:
+    #clone do projjeto
+    - uses: actions/checkouts@v4
+
+    #instalação do node
+    - uses: actions/setup-node@v4
+      with:
+        node-version:22.x
+
+    #instalaçção do yarn
+    - name: instalação yarn
+      run: npm install -g yarn
+
+    #instalação das dependencias
+    - name: instalação dependencias
+      run: yarn
+
+    # instalação do Playwright
+    - name: Instalando Playwright
+      run: yarn playwright install
+    
+    #executar os testes e2e
+    - name: Executando Teste e2e
+      run: yarn run e2e
