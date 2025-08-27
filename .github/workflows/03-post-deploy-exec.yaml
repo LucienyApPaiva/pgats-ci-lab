@@ -12,7 +12,7 @@ on:
   workflow_run:
     workflows: ['Execução Manual']
     types:
-      - completed
+    - completed
 
 # trabalhos/tarefas dentro do pipelie = jobs
 jobs:
