@@ -53,7 +53,7 @@ jobs:
       - name: Instalando dependencias
         run: yarn
 
-      - name: Instalando o Playwright 
+      - name: Instalando o Playwright
         run: yarn playwright install
 
       - name: Executando Testes E2E
@@ -69,6 +69,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Simulação do Deploy
         run: echo "simulando o deploy com sucesso"
