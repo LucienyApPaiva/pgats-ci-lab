@@ -1,0 +1,36 @@
+name: CI - PGATS Automação
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pipeline-n1:
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: yarn install
+
+      - name: Rodar testes unitários
+        run: yarn run test
+
+      - name: Subir aplicação
+        run: yarn start &
+      
+      - name: Aguardar aplicação subir
+        run: npx wait-on http://localhost:3000
+
+      - name: Instalar browsers do Playwright
+        run: npx playwright install --with-deps
+
+      - name: Rodar testes E2E
+        run: yarn run e2e
